@@ -13,7 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   apt-utils \
   git \
   libcppunit-dev \
-  libgtk2.0-degiyv \
+  libgtk2.0-dev \
   libgtk2.0-0 \
   libqt4-dev \
   libqwt-dev \
