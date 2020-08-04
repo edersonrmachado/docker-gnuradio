@@ -9,6 +9,7 @@ RUN apt-get update -q
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   --no-install-recommends \
   build-essential \ 
+  pkg-config \
   apt-utils \
   git \
   libcppunit-dev \
@@ -19,6 +20,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   pyqt4-dev-tools \
   libqwt5-qt4 \
   python \
+  python-gtk2 \
+  python-wxgtk3.0 \
   python-cheetah \
   python-sphinx \
   python-dev \
@@ -31,7 +34,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
 RUN pip install --upgrade pip
 RUN pip install --upgrade git+https://github.com/gnuradio/pybombs.git
 
-# Config pybombs and install gnuradio 3.7
+# Config PyBOMBS and install gnuradio 3.7
 RUN apt-get -qq update \
   && pybombs auto-config \
   && pybombs config --package pygtk forceinstalled true \
@@ -39,7 +42,7 @@ RUN apt-get -qq update \
   && pybombs recipes add-defaults \
   && pybombs -vv prefix init ${PyBOMBS_prefix} -R gnuradio-stable
 
-# clear local repository, packages that are no longer requested, providing disk space
+# Clear local repository, packages that are no longer requested, providing disk space
 RUN rm -rf /tmp/* && apt-get -y autoremove --purge \
   && apt-get -y clean && apt-get -y autoclean
 
