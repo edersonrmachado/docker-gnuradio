@@ -3,7 +3,9 @@ FROM ubuntu:18.04
 # set pybombs env variable
 ENV PyBOMBS_prefix GNURADIO
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update -q
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  apt-utils \
   git \
   python \
   python-pip 
@@ -17,4 +19,4 @@ RUN apt-get -qq update \
   && pybombs recipes add-defaults \
   && pybombs -vv prefix init ${PyBOMBS_prefix} -R gnuradio-stable
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"] 
