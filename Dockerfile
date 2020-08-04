@@ -11,13 +11,22 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   build-essential \ 
   apt-utils \
   git \
+  libcppunit-dev \
+  libgtk2.0-dev \
+  libgtk2.0-0 \
+  libqt4-dev \
+  libqwt-dev \
+  pyqt4-dev-tools \
+  libqwt5-qt4 \
   python \
+  python-cheetah \
+  python-sphinx \
   python-dev \
   python-pip \
   python-apt \
   python-numpy \
   python-setuptools
-  
+
 # Install PyBOMBS
 RUN pip install --upgrade pip
 RUN pip install --upgrade git+https://github.com/gnuradio/pybombs.git
@@ -25,6 +34,7 @@ RUN pip install --upgrade git+https://github.com/gnuradio/pybombs.git
 # Config pybombs and install gnuradio 3.7
 RUN apt-get -qq update \
   && pybombs auto-config \
+  && pybombs config --package pygtk forceinstalled true \
   && pybombs config makewidth 2 \
   && pybombs recipes add-defaults \
   && pybombs -vv prefix init ${PyBOMBS_prefix} -R gnuradio-stable
