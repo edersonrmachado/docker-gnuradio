@@ -15,7 +15,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   python-dev \
   python-pip \
   python-apt \
-  python-numpy 
+  python-numpy \
+  python-setuptools
+  
 # Install PyBOMBS
 RUN pip install --upgrade pip
 RUN pip install --upgrade git+https://github.com/gnuradio/pybombs.git
