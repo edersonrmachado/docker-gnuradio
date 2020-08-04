@@ -4,12 +4,13 @@ FROM ubuntu:18.04
 ENV PyBOMBS_prefix GNURADIO
 
 RUN apt-get update && apt-get install -y \
+  apt-utils \
   git \
   python \
   python-pip 
 
 # Install PyBOMBS
-RUN  pip install --upgrade git+https://github.com/gnuradio/pybombs.git
+RUN pip install --upgrade git+https://github.com/gnuradio/pybombs.git
 
 # Config pybombs and install gnuradio 3.7
 RUN apt-get -qq update \
